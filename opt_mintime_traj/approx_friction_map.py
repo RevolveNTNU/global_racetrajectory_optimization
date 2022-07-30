@@ -4,7 +4,7 @@ import trajectory_planning_helpers as tph
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import LinearRegression
-import opt_mintime_traj
+from . import extract_friction_coeffs
 
 
 def approx_friction_map(reftrack: np.ndarray,
@@ -51,7 +51,7 @@ def approx_friction_map(reftrack: np.ndarray,
     # ------------------------------------------------------------------------------------------------------------------
 
     # extract friction coefficients from friction map
-    n, mue_fl, mue_fr, mue_rl, mue_rr = opt_mintime_traj.src.extract_friction_coeffs.\
+    n, mue_fl, mue_fr, mue_rl, mue_rr = extract_friction_coeffs.\
         extract_friction_coeffs(reftrack=reftrack,
                                 normvectors=normvectors,
                                 tpamap_path=tpamap_path,

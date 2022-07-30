@@ -201,7 +201,7 @@ if not (opt_type == 'mintime' and not mintime_opts["recalc_vel_profile_by_tph"])
 t_start = time.perf_counter()
 
 # import track
-reftrack_imp = helper_funcs_glob.src.import_track.import_track(imp_opts=imp_opts,
+reftrack_imp = helper_funcs_glob.import_track.import_track(imp_opts=imp_opts,
                                                                file_path=file_paths["track_file"],
                                                                width_veh=pars["veh_params"]["width"])
 
@@ -239,7 +239,7 @@ if opt_type == 'mintime' and pars["optim_opts"]["safe_traj"] \
 # ----------------------------------------------------------------------------------------------------------------------
 
 reftrack_interp, normvec_normalized_interp, a_interp, coeffs_x_interp, coeffs_y_interp = \
-    helper_funcs_glob.src.prep_track.prep_track(reftrack_imp=reftrack_imp,
+    helper_funcs_glob.prep_track.prep_track(reftrack_imp=reftrack_imp,
                                                 reg_smooth_opts=pars["reg_smooth_opts"],
                                                 stepsize_opts=pars["stepsize_opts"],
                                                 debug=debug,
@@ -291,7 +291,7 @@ elif opt_type == 'shortest_path':
 elif opt_type == 'mintime':
     # reftrack_interp, a_interp and normvec_normalized_interp are returned for the case that non-regular sampling was
     # applied
-    alpha_opt, v_opt, reftrack_interp, a_interp_tmp, normvec_normalized_interp = opt_mintime_traj.src.opt_mintime.\
+    alpha_opt, v_opt, reftrack_interp, a_interp_tmp, normvec_normalized_interp = opt_mintime_traj.opt_mintime.\
         opt_mintime(reftrack=reftrack_interp,
                     coeffs_x=coeffs_x_interp,
                     coeffs_y=coeffs_y_interp,
@@ -329,7 +329,7 @@ if opt_type == 'mintime' and mintime_opts["reopt_mintime_solution"]:
 
     # use spline approximation a second time
     reftrack_interp, normvec_normalized_interp, a_interp = \
-        helper_funcs_glob.src.prep_track.prep_track(reftrack_imp=racetrack_mintime,
+        helper_funcs_glob.prep_track.prep_track(reftrack_imp=racetrack_mintime,
                                                     reg_smooth_opts=pars["reg_smooth_opts"],
                                                     stepsize_opts=pars["stepsize_opts"],
                                                     debug=False,
@@ -518,7 +518,7 @@ print("INFO: Runtime from import to final trajectory was %.2fs" % (time.perf_cou
 # CHECK TRAJECTORY -----------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 
-bound1, bound2 = helper_funcs_glob.src.check_traj.\
+bound1, bound2 = helper_funcs_glob.check_traj.\
     check_traj(reftrack=reftrack_interp,
                reftrack_normvec_normalized=normvec_normalized_interp,
                length_veh=pars["veh_params"]["length"],
@@ -538,12 +538,12 @@ bound1, bound2 = helper_funcs_glob.src.check_traj.\
 
 # export race trajectory  to CSV
 if "traj_race_export" in file_paths.keys():
-    helper_funcs_glob.src.export_traj_race.export_traj_race(file_paths=file_paths,
+    helper_funcs_glob.export_traj_race.export_traj_race(file_paths=file_paths,
                                                             traj_race=traj_race_cl)
 
 # if requested, export trajectory including map information (via normal vectors) to CSV
 if "traj_ltpl_export" in file_paths.keys():
-    helper_funcs_glob.src.export_traj_ltpl.export_traj_ltpl(file_paths=file_paths,
+    helper_funcs_glob.export_traj_ltpl.export_traj_ltpl(file_paths=file_paths,
                                                             spline_lengths_opt=spline_lengths_opt,
                                                             trajectory_opt=trajectory_opt,
                                                             reftrack=reftrack_interp,
@@ -571,7 +571,7 @@ if plot_opts["imported_bounds"]:
     bound2_imp = reftrack_imp[::n_skip, :2] - normvec_imp * np.expand_dims(reftrack_imp[::n_skip, 3], 1)
 
 # plot results
-helper_funcs_glob.src.result_plots.result_plots(plot_opts=plot_opts,
+helper_funcs_glob.result_plots.result_plots(plot_opts=plot_opts,
                                                 width_veh_opt=pars["optim_opts"]["width_opt"],
                                                 width_veh_real=pars["veh_params"]["width"],
                                                 refline=reftrack_interp[:, :2],

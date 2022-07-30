@@ -3,7 +3,7 @@ import sys
 import time
 import numpy as np
 import casadi as ca
-import opt_mintime_traj
+from . import approx_friction_map, powertrain, export_mintime_solution, result_plots_mintime
 import trajectory_planning_helpers as tph
 
 
@@ -125,7 +125,7 @@ def opt_mintime(reftrack: np.ndarray,
 
     # describe friction coefficients from friction map with linear equations or gaussian basis functions
     if pars["optim_opts"]["var_friction"] is not None:
-        w_mue_fl, w_mue_fr, w_mue_rl, w_mue_rr, center_dist = opt_mintime_traj.src. \
+        w_mue_fl, w_mue_fr, w_mue_rl, w_mue_rr, center_dist =  \
             approx_friction_map.approx_friction_map(reftrack=reftrack,
                                                     normvectors=normvectors,
                                                     tpamap_path=tpamap_path,
@@ -215,16 +215,16 @@ def opt_mintime(reftrack: np.ndarray,
     if pars["pwr_params_mintime"]["pwr_behavior"]:
 
         # Initialize e-machine object
-        machine = opt_mintime_traj.powertrain_src.src.EMachine.EMachineModel(pwr_pars=pars["pwr_params_mintime"])
+        machine = powertrain.EMachine.EMachineModel(pwr_pars=pars["pwr_params_mintime"])
 
         # Initialize battery object
-        batt = opt_mintime_traj.powertrain_src.src.Battery.BattModel(pwr_pars=pars["pwr_params_mintime"])
+        batt = powertrain.Battery.BattModel(pwr_pars=pars["pwr_params_mintime"])
 
         # Initialize inverter object
-        inverter = opt_mintime_traj.powertrain_src.src.Inverter.InverterModel(pwr_pars=pars["pwr_params_mintime"])
+        inverter = powertrain.Inverter.InverterModel(pwr_pars=pars["pwr_params_mintime"])
 
         # Initialize radiator objects (2 in total)
-        radiators = opt_mintime_traj.powertrain_src.src.Radiators.RadiatorModel(pwr_pars=pars["pwr_params_mintime"])
+        radiators = powertrain.Radiators.RadiatorModel(pwr_pars=pars["pwr_params_mintime"])
 
         # scaling factors for state variables
         x_s = np.array([v_s, beta_s, omega_z_s, n_s, xi_s,
@@ -977,7 +977,7 @@ def opt_mintime(reftrack: np.ndarray,
     # ------------------------------------------------------------------------------------------------------------------
 
     # export data to CSVs
-    opt_mintime_traj.src.export_mintime_solution.export_mintime_solution(file_path=export_path,
+    export_mintime_solution.export_mintime_solution(file_path=export_path,
                                                                          pars=pars,
                                                                          s=s_opt,
                                                                          t=t_opt,
@@ -997,7 +997,7 @@ def opt_mintime(reftrack: np.ndarray,
     # ------------------------------------------------------------------------------------------------------------------
 
     if plot_debug:
-        opt_mintime_traj.src.result_plots_mintime.result_plots_mintime(pars=pars,
+        result_plots_mintime.result_plots_mintime(pars=pars,
                                                                        reftrack=reftrack,
                                                                        s=s_opt,
                                                                        t=t_opt,

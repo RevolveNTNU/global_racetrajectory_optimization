@@ -58,13 +58,13 @@ path2tpadata_file = os.path.join(path2module, 'inputs', 'frictionmaps', filename
 # ----------------------------------------------------------------------------------------------------------------------
 
 # read reference track file
-reftrack = frictionmap.src.reftrack_functions.load_reftrack(path2track=path2reftrack_file)
+reftrack = frictionmap.reftrack_functions.load_reftrack(path2track=path2reftrack_file)
 
 # check whether reference line is closed (is the race track a circuit or not)
-bool_isclosed_refline = frictionmap.src.reftrack_functions.check_isclosed_refline(refline=reftrack[:, :2])
+bool_isclosed_refline = frictionmap.reftrack_functions.check_isclosed_refline(refline=reftrack[:, :2])
 
 # calculate coordinates of the track boundaries
-reftrackbound_right, reftrackbound_left = frictionmap.src.reftrack_functions.calc_trackboundaries(reftrack=reftrack)
+reftrackbound_right, reftrackbound_left = frictionmap.reftrack_functions.calc_trackboundaries(reftrack=reftrack)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # SAMPLE COORDINATES FOR FRICTION MAP ----------------------------------------------------------------------------------
@@ -165,17 +165,17 @@ print('INFO: tpa_data saved successfully!')
 
 if bool_show_plots:
     # plot reference line and normal vectors
-    frictionmap.src.reftrack_functions.plot_refline(reftrack=reftrack)
+    frictionmap.reftrack_functions.plot_refline(reftrack=reftrack)
 
     # plot spatial grid of friction map
-    frictionmap.src.plot_frictionmap_grid.\
+    frictionmap.plot_frictionmap_grid.\
         plot_voronoi_fromVariable(tree=tpa_map,
                                   refline=reftrack[:, :2],
                                   trackbound_left=reftrackbound_left,
                                   trackbound_right=reftrackbound_right)
 
     # plot friction data of friction map
-    frictionmap.src.plot_frictionmap_data.\
+    frictionmap.plot_frictionmap_data.\
         plot_tpamap_fromVariable(tpa_map=tpa_map,
                                  tpa_data=tpa_data,
                                  refline=reftrack[:, :2],

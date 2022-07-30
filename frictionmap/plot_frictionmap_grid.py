@@ -42,8 +42,8 @@ def plot_voronoi_fromFile(track_name: str,
     # Read Files -------------------------------------------------------------------------------------------------------
 
     # load reference line and calculate track boundaries
-    reftrack = frictionmap.src.reftrack_functions.load_reftrack(path2track=path2reftrack_file)
-    trackbound_right, trackbound_left = frictionmap.src.reftrack_functions.calc_trackboundaries(reftrack=reftrack)
+    reftrack = frictionmap.reftrack_functions.load_reftrack(path2track=path2reftrack_file)
+    trackbound_right, trackbound_left = frictionmap.reftrack_functions.calc_trackboundaries(reftrack=reftrack)
 
     # load friction map
     with open(filepath_frictionmap, 'rb') as fh:

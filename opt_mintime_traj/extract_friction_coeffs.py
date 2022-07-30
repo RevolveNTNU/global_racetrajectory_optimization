@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 import trajectory_planning_helpers as tph
-import opt_mintime_traj
+from . import friction_map_interface
 
 
 def extract_friction_coeffs(reftrack: np.ndarray,
@@ -60,7 +60,7 @@ def extract_friction_coeffs(reftrack: np.ndarray,
     wb_r = pars["vehicle_params_mintime"]["wheelbase_rear"]
 
     # initialize map interface
-    map_interface = opt_mintime_traj.src.friction_map_interface.FrictionMapInterface(tpamap_path=tpamap_path,
+    map_interface = friction_map_interface.FrictionMapInterface(tpamap_path=tpamap_path,
                                                                                      tpadata_path=tpadata_path)
 
     # initialize solution
