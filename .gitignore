@@ -138,4 +138,4 @@ dmypy.json
 
 # repo specific
 outputs
-/inputs/tracks/wpts.csv
+/inputs/tracks/input.csv
