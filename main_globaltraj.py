@@ -39,7 +39,7 @@ plot_opts = {"mincurv_curv_lin": False,         # plot curv. linearization (orig
 
 # select track file (including centerline coordinates + track widths) --------------------------------------------------
 # file_paths["track_name"] = "rounded_rectangle"                              # artificial track
-#file_paths["track_name"] = "rounded_rectangle"                                 # artificial track
+# file_paths["track_name"] = "handling_track"                                 # artificial track
 file_paths["track_name"] = "input"
 
 # set import options ---------------------------------------------------------------------------------------------------
