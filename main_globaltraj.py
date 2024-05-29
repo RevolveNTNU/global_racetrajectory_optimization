@@ -67,7 +67,7 @@ opt_type = 'mintime'
 # recalc_vel_profile_by_tph:    override mintime velocity profile by ggv based calculation (see TPH package)
 
 mintime_opts = {"tpadata": None,
-                "warm_start": True,
+                "warm_start": False,
                 "var_friction": None,
                 "reopt_mintime_solution": False,
                 "recalc_vel_profile_by_tph": False}
@@ -110,7 +110,6 @@ with open(requirements_path, 'r') as fh:
         line = fh.readline()
 
 # check dependencies
-pkg_resources.require(dependencies)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # INITIALIZATION OF PATHS ----------------------------------------------------------------------------------------------
