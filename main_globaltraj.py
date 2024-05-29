@@ -110,7 +110,6 @@ with open(requirements_path, 'r') as fh:
         line = fh.readline()
 
 # check dependencies
-# pkg_resources.require(dependencies)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # INITIALIZATION OF PATHS ----------------------------------------------------------------------------------------------
