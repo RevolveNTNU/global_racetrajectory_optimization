@@ -39,7 +39,7 @@ plot_opts = {"mincurv_curv_lin": False,         # plot curv. linearization (orig
 
 # select track file (including centerline coordinates + track widths) --------------------------------------------------
 # file_paths["track_name"] = "rounded_rectangle"                              # artificial track
-# file_paths["track_name"] = "handling_track"                                 # artificial track
+#file_paths["track_name"] = "rounded_rectangle"                                 # artificial track
 file_paths["track_name"] = "input"
 
 # set import options ---------------------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ opt_type = 'mintime'
 # recalc_vel_profile_by_tph:    override mintime velocity profile by ggv based calculation (see TPH package)
 
 mintime_opts = {"tpadata": None,
-                "warm_start": True,
+                "warm_start": False,
                 "var_friction": None,
                 "reopt_mintime_solution": False,
                 "recalc_vel_profile_by_tph": False}
@@ -110,7 +110,7 @@ with open(requirements_path, 'r') as fh:
         line = fh.readline()
 
 # check dependencies
-pkg_resources.require(dependencies)
+# pkg_resources.require(dependencies)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # INITIALIZATION OF PATHS ----------------------------------------------------------------------------------------------
