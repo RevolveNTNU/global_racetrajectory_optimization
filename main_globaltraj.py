@@ -23,7 +23,7 @@ This script has to be executed to generate an optimal trajectory based on a give
 # ----------------------------------------------------------------------------------------------------------------------
 
 # choose vehicle parameter file ----------------------------------------------------------------------------------------
-file_paths = {"veh_params_file": "atmos.ini"}
+file_paths = {"veh_params_file": "hera.ini"}
 
 # debug and plot options -----------------------------------------------------------------------------------------------
 debug = True                                    # print console messages
